@@ -1,0 +1,49 @@
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.gap-100 {
+    gap: var(--spacing-100);
+}
+
+/* -----------------------------------------------------  */
+/* Marign botoom class  */
+.mb-100 {
+    margin-bottom: var(--spacing-100);
+}
+.mb-200 {
+    margin-bottom: var(--spacing-200);
+}
+.mb-300 {
+    margin-bottom: var(--spacing-300);
+}
+.mb-400 {
+    margin-bottom: var(--spacing-400);
+}
+.mb-500 {
+    margin-bottom: var(--spacing-500);
+}
+
+/* Margin top class  */
+.mt-100 {
+    margin-top: var(--spacing-100);
+}
+.mt-200 {
+    margin-top: var(--spacing-200);
+}
+.mt-300 {
+    margin-top: var(--spacing-300);
+}
+.mt-400 {
+    margin-top: var(--spacing-400);
+}
+.mt-500 {
+    margin-top: var(--spacing-500);
+}
+/* -----------------------------------------------------  */
