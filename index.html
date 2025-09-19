@@ -8,9 +8,63 @@
   </head>
   <body>
     <main>
-      <div class="main-card">
-        <h1>hello</h1>
-      </div>
+      <form id="age-form" class="age-form" novalidate>
+        <div class="fields">
+          <div class="field">
+            <label for="day">DAY</label>
+            <input
+              id="day"
+              name="day"
+              type="number"
+              placeholder="DD"
+              min="1"
+              max="31"
+            />
+          </div>
+
+          <div class="field">
+            <label for="month">MONTH</label>
+            <input
+              id="month"
+              name="month"
+              type="number"
+              placeholder="MM"
+              min="1"
+              max="12"
+            />
+          </div>
+
+          <div class="field">
+            <label for="year">YEAR</label>
+            <input id="year" name="year" type="number" placeholder="YYYY" />
+          </div>
+        </div>
+        <div class="divider">
+          <button type="submit" class="action-btn" aria-label="Calculate age">
+            <!-- SVG – גרסת B (scale מוקטן ו-stroke-width: 2.4) -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 46 46"
+              aria-hidden="true"
+            >
+              <g
+                fill="none"
+                stroke="#fff"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                transform="translate(23 23) scale(1.5) translate(-23 -23)"
+              >
+                <path d="M8 23C12 22.7 23 26.6 23 40" />
+                <path d="M23 6V40" />
+                <path d="M38 23C34 22.7 23 26.6 23 40" />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </form>
     </main>
 
     <script src="js/main.js"></script>
