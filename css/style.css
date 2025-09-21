@@ -17,15 +17,20 @@ body {
   display: flex;
   flex-direction: row;
   gap: var(--spacing-400);
+  margin-right: 140px;
 }
-/* הקו הדק */
+.field {
+  max-width: 150px;
+}
+
+/* --------------------------- */
+
 .divider {
   position: relative;
   margin: var(--spacing-600) 0;
   border-top: 1px solid var(--grey-200);
 }
 
-/* הכפתור הסגול על הקו */
 .action-btn {
   position: absolute;
   right: 0;
@@ -42,9 +47,27 @@ body {
   box-shadow: 0 6px 14px rgba(0,0,0,.12);
 }
 
-/* אפקט קטן ל-hover/focus */
 .action-btn:hover { filter: brightness(1.05); }
 .action-btn:focus-visible {
   outline: 3px solid rgba(133,77,255,.35);
   outline-offset: 3px;
 }
+
+/* --------------------------- */
+
+/* DATED  */
+.date {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--grey-500);
+}
+
+.date-input {
+  width: 80px;
+}
+/* --------------------------- */
+

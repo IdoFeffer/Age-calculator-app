@@ -10,8 +10,8 @@
     <main>
       <form id="age-form" class="age-form" novalidate>
         <div class="fields">
-          <div class="field">
-            <label for="day">DAY</label>
+          <div class="field flex-column">
+            <label for="day" class="date">DAY</label>
             <input
               id="day"
               name="day"
@@ -19,11 +19,12 @@
               placeholder="DD"
               min="1"
               max="31"
+              class="date-input"
             />
           </div>
 
-          <div class="field">
-            <label for="month">MONTH</label>
+          <div class="field flex-column">
+            <label for="month" class="date">MONTH</label>
             <input
               id="month"
               name="month"
@@ -31,17 +32,24 @@
               placeholder="MM"
               min="1"
               max="12"
+              class="date-input"
             />
           </div>
 
-          <div class="field">
-            <label for="year">YEAR</label>
-            <input id="year" name="year" type="number" placeholder="YYYY" />
+          <div class="field flex-column">
+            <label for="year" class="date">YEAR</label>
+            <input
+              id="year"
+              name="year"
+              type="number"
+              placeholder="YYYY"
+              class="date-input"
+            />
           </div>
         </div>
+
         <div class="divider">
           <button type="submit" class="action-btn" aria-label="Calculate age">
-            <!-- SVG – גרסת B (scale מוקטן ו-stroke-width: 2.4) -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
@@ -64,6 +72,7 @@
             </svg>
           </button>
         </div>
+
       </form>
     </main>
 
