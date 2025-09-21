@@ -9,6 +9,7 @@
   <body>
     <main>
       <form id="age-form" class="age-form" novalidate>
+        
         <div class="fields">
           <div class="field flex-column">
             <label for="day" class="date">DAY</label>
@@ -71,6 +72,23 @@
               </g>
             </svg>
           </button>
+        </div>
+
+        <div class="result" aria-live="polite">
+          <p class="result-row">
+            <span id="years" class="num">--</span>
+            <span class="unit">years</span>
+          </p>
+
+          <p class="result-row">
+            <span id="months" class="num">--</span>
+            <span class="unit">months</span>
+          </p>
+
+          <p class="result-row">
+            <span id="days" class="num">--</span>
+            <span class="unit">days</span>
+          </p>
         </div>
 
       </form>

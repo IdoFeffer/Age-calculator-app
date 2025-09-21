@@ -44,12 +44,14 @@ body {
   display: grid;
   place-items: center;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0,0,0,.12);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
-.action-btn:hover { filter: brightness(1.05); }
+.action-btn:hover {
+  filter: brightness(1.05);
+}
 .action-btn:focus-visible {
-  outline: 3px solid rgba(133,77,255,.35);
+  outline: 3px solid rgba(133, 77, 255, 0.35);
   outline-offset: 3px;
 }
 
@@ -69,5 +71,35 @@ body {
 .date-input {
   width: 80px;
 }
+/* --------------------------- */
+
+.result {
+  margin-top: var(--spacing-600);
+}
+
+.result-row {
+  margin: 0;
+  color: var(--black);
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--fs-preset-1);
+  line-height: var(--lh-preset-1);
+  letter-spacing: var(--ls-preset-1);
+}
+
+.result-row .num {
+  font-weight: 800;
+  font-style: italic;
+  color: var(--purple-500);
+  letter-spacing: var(--ls-preset-1);
+  font-size: var(--fs-preset-1);
+  line-height: var(--lh-preset-1);
+  margin-inline-end: 8px;
+  display: inline-block;
+}
+
+.result-row .unit {
+  font-weight: 700;
+}
+
 /* --------------------------- */
 
