@@ -113,4 +113,22 @@ input {
   display: inline-block;
 }
 
-/* --------------------------- */
+/* ---------------------------------  */
+/* Error message  */
+
+.field-error {
+  display: none;
+  color: var(--red-400);
+}
+
+.was-validated input:invalid {
+  border-color: var(--red-500);
+  box-shadow: 0 0 0 1px var(--red-500) inset;
+}
+
+.was-validated input:invalid ~ .field-error,
+.was-validated textarea:invalid ~ .field-error {
+  display: block;
+}
+
+/* ----------------------------------- */

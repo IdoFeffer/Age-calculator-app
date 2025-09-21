@@ -9,7 +9,6 @@
   <body>
     <main>
       <form id="age-form" class="age-form" novalidate>
-        
         <div class="fields">
           <div class="field flex-column">
             <label for="day" class="date">DAY</label>
@@ -22,6 +21,9 @@
               max="31"
               class="date-input"
             />
+            <p id="day-error" class="field-error" role="alert">
+              Must be a valid day
+            </p>
           </div>
 
           <div class="field flex-column">
@@ -35,6 +37,9 @@
               max="12"
               class="date-input"
             />
+            <p id="month-error" class="field-error" role="alert">
+              Must be a valid month
+            </p>
           </div>
 
           <div class="field flex-column">
@@ -46,6 +51,9 @@
               placeholder="YYYY"
               class="date-input"
             />
+            <p id="year-error" class="field-error" role="alert">
+              Must be a valid year
+            </p>
           </div>
         </div>
 
@@ -90,7 +98,7 @@
             <span class="unit">days</span>
           </p>
         </div>
-
+        
       </form>
     </main>
 
