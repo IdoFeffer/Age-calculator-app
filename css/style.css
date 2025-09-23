@@ -54,6 +54,7 @@ input {
   place-items: center;
   cursor: pointer;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
 }
 .action-btn:hover {
   filter: brightness(1.05);
@@ -63,6 +64,9 @@ input {
   outline-offset: 3px;
 }
 
+.action-btn:active {
+  background-color: var(--black);
+}
 /* --------------------------- */
 
 .date {
@@ -117,18 +121,86 @@ input {
 /* Error message  */
 
 .field-error {
-  display: none;
+  visibility: hidden;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 150%;
   color: var(--red-400);
 }
 
-.was-validated input:invalid {
-  border-color: var(--red-500);
-  box-shadow: 0 0 0 1px var(--red-500) inset;
+.field.has-error .date {
+  color: var(--red-400);
 }
 
-.was-validated input:invalid ~ .field-error,
-.was-validated textarea:invalid ~ .field-error {
-  display: block;
+.field.has-error .field-error {
+  visibility: visible;
+}
+
+.field.has-error input {
+  border: 1px solid var(--red-400);
 }
 
 /* ----------------------------------- */
+
+/* ===== Mobile tweaks ===== */
+@media (max-width: 640px) {
+  main {
+    padding: 12px;
+  }
+
+  .main-card {
+    width: min(94vw, 360px);
+    padding: 18px;
+    border-radius: 18px;
+    border-bottom-right-radius: 120px 100px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .age-form .fields {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .date {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .date-input {
+    height: 44px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+
+  .divider {
+    margin: 16px 0;
+    border-top: 1px solid var(--grey-200);
+    position: relative;
+  }
+
+  .action-btn {
+    width: 48px;
+    height: 48px;
+    left: 50%;
+    right: auto; 
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  /* תוצאות */
+  .result {
+    margin-top: 12px;
+  }
+
+  .result-row {
+    font-size: 36px; 
+    line-height: 1.1;
+    margin: 8px 0;
+  }
+
+  .result-row .num {
+    margin-inline-end: 6px;
+  }
+}

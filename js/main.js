@@ -9,56 +9,130 @@ const yearsOut = document.getElementById('years')
 const monthsOut = document.getElementById('months')
 const daysOut = document.getElementById('days')
 
+const dayField = dayEl.closest('.field')
+const monthField = monthEl.closest('.field')
+const yearField = yearEl.closest('.field')
+
+const dayErr = document.getElementById('day-error')
+const monthErr = document.getElementById('month-error')
+const yearErr = document.getElementById('year-error')
+
+function isRealDate(d, m, y) {
+  const dt = new Date(y, m - 1, d)
+  return dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d
+}
+
+function setDateGroupError(msg) {
+  setError(dayField, dayEl, dayErr, msg)
+  setError(monthField, monthEl, monthErr, msg)
+  setError(yearField, yearEl, yearErr, msg)
+}
+
 function daysInMonth(y, mIdx0) {
   return new Date(y, mIdx0 + 1, 0).getDate()
 }
 
+function setError(fieldDiv, inputEl, msgEl, msg) {
+  fieldDiv.classList.add('has-error')
+  inputEl.setAttribute('aria-invalid', 'true')
+  if (msgEl) msgEl.textContent = msg
+}
+function clearError(fieldDiv, inputEl, msgEl) {
+  fieldDiv.classList.remove('has-error')
+  inputEl.removeAttribute('aria-invalid')
+  if (msgEl) msgEl.textContent = ''
+}
+function resetErrors() {
+  clearError(dayField, dayEl, dayErr)
+  clearError(monthField, monthEl, monthErr)
+  clearError(yearField, yearEl, yearErr)
+}
+function showResult(y = '--', m = '--', d = '--') {
+  yearsOut.textContent = String(y)
+  monthsOut.textContent = String(m)
+  daysOut.textContent = String(d)
+}
+
 form.addEventListener('submit', (ev) => {
   ev.preventDefault()
+  resetErrors()
+  showResult() // מציב -- כברירת מחדל
 
   const day = dayEl.value ? Number(dayEl.value) : null
   const month = monthEl.value ? Number(monthEl.value) : null
   const year = yearEl.value ? Number(yearEl.value) : null
 
-  if (!day || !month || !year) {
-    yearsOut.textContent = '--'
-    monthsOut.textContent = '--'
-    daysOut.textContent = '--'
+  // ---- ולידציות בסיס ----
+  let hasError = false
+
+  // Required
+  if (!day) {
+    setError(dayField, dayEl, dayErr, 'This field is required')
+    hasError = true
+  }
+  if (!month) {
+    setError(monthField, monthEl, monthErr, 'This field is required')
+    hasError = true
+  }
+  if (!year) {
+    setError(yearField, yearEl, yearErr, 'This field is required')
+    hasError = true
+  }
+
+  // טווחים כלליים
+  if (day !== null && (day < 1 || day > 31)) {
+    setError(dayField, dayEl, dayErr, 'Must be a valid day')
+    hasError = true
+  }
+  if (month !== null && (month < 1 || month > 12)) {
+    setError(monthField, monthEl, monthErr, 'Must be a valid month')
+    hasError = true
+  }
+
+  if (hasError) return // ← למשל month=13 ייעצר כאן וידליק חיווי אדום
+
+  // ---- ולידציות תלויות חודש/שנה ----
+  const today = new Date()
+  // ---- ולידציה משותפת: התאריך חייב להיות אמיתי בלוח השנה ----
+  if (!isRealDate(day, month, year)) {
+    setDateGroupError('Must be a valid date') // מסמן את שלושתם
+    return showResult() // נשאר עם -- --
+  }
+
+  const birthDate = new Date(year, month - 1, day)
+  if (birthDate > today) {
+    setError(yearField, yearEl, yearErr, 'Must be in the past')
     return
   }
 
-  const today = new Date()
-  const todayYear = today.getFullYear()
-  const todayMonth = today.getMonth() // 0..11
-  const todayDay = today.getDate()
+  // ---- חישוב גיל ----
+  const tY = today.getFullYear()
+  const tM = today.getMonth() // 0..11
+  const tD = today.getDate()
 
-  // --- Year ---
-  let years = todayYear - year
-  const hadBirthdayThisYear =
-    todayMonth > month - 1 || (todayMonth === month - 1 && todayDay >= day)
+  // שנים
+  let years = tY - year
+  const hadBirthdayThisYear = tM > month - 1 || (tM === month - 1 && tD >= day)
   if (!hadBirthdayThisYear) years--
 
-  // --- Month ---
-  let months = todayMonth - (month - 1)
-  if (todayDay < day) months -= 1
+  // חודשים
+  let months = tM - (month - 1)
+  if (tD < day) months -= 1
   if (months < 0) months += 12
 
-  // --- Days ---
+  // ימים
   let days
-
-  if (todayDay >= day) {
-    days = todayDay - day
+  if (tD >= day) {
+    days = tD - day
   } else {
-    let prevMonthIdx = todayMonth - 1
-    let prevmonthYear = todayYear
+    let prevMonthIdx = tM - 1,
+      prevMonthYear = tY
     if (prevMonthIdx < 0) {
       prevMonthIdx = 11
-      prevmonthYear--
+      prevMonthYear--
     }
-
-    const dim = daysInMonth(prevmonthYear, prevMonthIdx)
-    days = todayDay + dim - day
-
+    const dimPrev = daysInMonth(prevMonthYear, prevMonthIdx)
+    days = tD + dimPrev - day
     months -= 1
     if (months < 0) {
       months += 12
@@ -66,7 +140,5 @@ form.addEventListener('submit', (ev) => {
     }
   }
 
-  yearsOut.textContent = String(years)
-  monthsOut.textContent = String(months)
-  daysOut.textContent = String(days)
+  showResult(years, months, days)
 })
